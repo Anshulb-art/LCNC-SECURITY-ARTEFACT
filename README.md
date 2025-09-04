@@ -33,7 +33,6 @@ The goal is to provide **clear, clear** steps so anyone can run the same tests a
       CoffeeService/
       PurchaseRequest/
       TaskTracker/
-  reports/
     CoffeeService/
       SAST/
       DAST/
@@ -52,23 +51,13 @@ The goal is to provide **clear, clear** steps so anyone can run the same tests a
   sonar-project.properties         # if SAST is run from repo root
   .env.example                     # optional: example variables (no secrets)
   README.md                        # this file
-```
-**Naming convention for evidence** (files in `reports/…`):
-
-```
-YYYYMMDD_app_tool_topic.ext
-# examples
-20250903_TaskTracker_DAST_zap-baseline.html
-20250903_PurchaseRequest_BugBug_RBAC-approver-flow.png
-20250903_CoffeeService_SAST_sonar-summary.txt
-```
 
 
 ## 2) Prerequisites
 
 * Windows 10/11 with **PowerShell**
 * **Mendix Studio Pro** (version matching the sample apps)
-* Optional but recommended: **Docker Desktop** (for SonarQube and ZAP containers)
+* recommended: **Docker Desktop** (for SonarQube and ZAP containers(if required))
 * Browser (Chrome/Edge) for manual checks and BugBug recording
 * **Do not** commit secrets. Use environment variables while running.
 
@@ -179,7 +168,7 @@ docker run --rm ^
 * Try `http://localhost:808X/rest-doc/` or `.../openapi.json` if present.
 * Use Postman to call a **safe** GET endpoint without auth; confirm 401/403.
 
-Save all evidence to `reports/<App>/DAST/` with the naming convention.
+Save all evidence to with the naming convention.
 
 > Keep manual checks realistic. We are not performing destructive tests or fuzzing. The intent is to verify **role boundaries** and **object ownership**.
 
@@ -196,7 +185,7 @@ BugBug is used to **record real user flows** that illustrate permissions working
 **What to export**
 
 * Export screenshots (or short videos) of the passing/blocked steps
-* Save under `reports/<App>/BugBug/`
+* Save under /<App>/BugBug/`
 * For each flow, add a short `NOTES.txt` with: test goal, steps, expected vs. actual outcome
 
 > If BugBug cloud is used, avoid exporting sensitive data. Redact where needed. The goal is evidencing **authorization behavior**, not performance.
@@ -227,7 +216,7 @@ Create a short `SUMMARY.md` under each app’s `reports/<App>/` describing:
   * number of RBAC/IDOR test cases demonstrated via BugBug,
   * clarity/completeness of evidence (are steps and files sufficient for reproduction?).
 
-Keep all counts in a small table at `reports/metrics.csv` (optional but recommended).
+Keep all counts in a small table at `/metrics.csv` (optional but recommended).
 
 
 
@@ -252,13 +241,6 @@ Keep all counts in a small table at `reports/metrics.csv` (optional but recommen
 * Stay on **Demo/Prototype** for this artefact. Document the constraint.
 
 
-
-## 11) Housekeeping
-
-* Keep raw evidence files under `reports/…` only. Do not scatter in test folders.
-* Do not commit secrets. Use `ENV` vars and provide `.env.example` with placeholders.
-* If you generate `docs/structure-folders.txt` and `docs/counts.txt` using `tree`, commit them so reviewers can navigate faster.
-
 **PowerShell helpers (optional):**
 
 ```powershell
@@ -273,21 +255,7 @@ $totalFiles   = (Get-ChildItem $root -File -Recurse | Measure-Object).Count
 "Total folders: $totalFolders`nTotal files: $totalFiles" | Set-Content "$root\docs\counts.txt"
 ```
 
-
-
-## 12) Submission checklist (what a reviewer needs)
-
-* [ ] This README at repo root (clean and current)
-* [ ] Apps run locally; ports and demo users documented
-* [ ] SAST reports/screenshots for all three apps
-* [ ] ZAP baseline HTML for each app + manual RBAC/IDOR screenshots
-* [ ] BugBug flow evidence and short notes per flow
-* [ ] Concise `SUMMARY.md` per app with findings and mitigations
-* [ ] Optional metrics table (`reports/metrics.csv`)
-
-
-
-## 13) Credits & license
+## 12) Credits & license
 
 * Tools: SonarQube, OWASP ZAP, BugBug
 * Apps: Mendix sample applications (used for educational research)
