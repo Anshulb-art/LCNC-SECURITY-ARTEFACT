@@ -6,7 +6,7 @@ This repository documents a reproducible security assessment of three default Me
 * **DAST** (Dynamic Application Security Testing) with OWASP ZAP (baseline + manual active checks)
 * **BugBug** (record‑and‑replay end‑to‑end functional flows, used as evidence for RBAC/IDOR checks)
 
-The goal is to provide **clear, clear** steps so anoyone can run the same tests and obtain the same evidence. The repo is organized by **tool** and by **application**, and every test produces a concrete artifact (report or screenshot) saved under `reports/`.
+The goal is to provide **clear, clear** steps so anyone can run the same tests and obtain the same evidence. The repo is organized by **tool** and by **application**, and every test produces a concrete artifact (report or screenshot) saved under `reports/`.
 
 > **Scope & principle.** Tests run on **local developer instances** of the Mendix sample apps, with **no app model changes** beyond what’s necessary to boot the app. Security level: **Demo/Prototype** (unless stated otherwise). No production systems are scanned.
 
