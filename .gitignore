@@ -1,0 +1,28 @@
+# OS/IDE
+Thumbs.db
+Desktop.ini
+.BIN/
+.vscode/
+.idea/
+
+# Mendix
+.mendix-cache/
+deployment/
+
+# SonarQube
+.scannerwork/
+
+# Node/Playwright (if present)
+node_modules/
+package-lock.json
+
+# Python (if present)
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Reports & temp
+reports/**/tmp/
+*.log
