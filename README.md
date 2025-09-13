@@ -1,7 +1,7 @@
 ## Prerequisites
 - Windows 10/11 with **PowerShell**
 - **Mendix Studio Pro 10.23.0**
-- **Docker Desktop** (for SonarQube & OWASP ZAP containers)
+- **Docker Desktop** (for SonarQube & OWASP ZAP app(manual) and (bugbug manual).
 - Chrome/Edge for manual checks and BugBug
 - Do **not** commit secrets; use environment variables
 
