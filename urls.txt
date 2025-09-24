@@ -1,0 +1,14 @@
+﻿# Likely admin/engineer-only pages
+admin
+management
+engineer
+reports
+
+# Common data endpoints / IDOR candidates
+api/orders
+api/orders?id=1
+api/orders?id=2
+orders/1
+orders/2
+users/1
+users/2

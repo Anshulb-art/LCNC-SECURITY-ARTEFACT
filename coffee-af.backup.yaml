@@ -1,0 +1,94 @@
+﻿env:
+  contexts:
+    - name: CoffeeContext
+      urls:
+        - "http://host.docker.internal:8080/"
+      includePaths:
+        - "http://host.docker.internal:8080/.*"
+      authentication:
+        method: form
+        parameters:
+          loginUrl: "http://host.docker.internal:8080/login.html"
+          loginRequestData: "username={%username%}&password={%password%}"
+        verification:
+          method: response
+          loggedInRegex: "(?i)logout|sign\\s*out|welcome"
+          loggedOutRegex: "(?i)login|sign\\s*in"
+      sessionManagement:
+        method: cookie
+      users:
+        - name: Customer-Jack
+          credentials:
+            username: "Jack"
+            password: "HvvG5JSD9z"
+        - name: Customer-Roxanne
+          credentials:
+            username: "Roxanne"
+            password: "lyUPZbH3ud"
+        - name: Engineer-Bill
+          credentials:
+            username: "Bill"
+            password: "tGovGHz1r3"
+        - name: Engineer-Cate
+          credentials:
+            username: "Cate"
+            password: "5danyEOvje"
+
+  vars:
+    target: "http://host.docker.internal:8080/"
+
+  parameters:
+    failOnError: true
+    progressToStdout: true
+
+jobs:
+  - type: spider
+    parameters:
+      context: "CoffeeContext"
+      maxDuration: 5
+      maxChildren: 0
+      url: "${env.vars.target}"
+      recurse: true
+      user: "Customer-Jack"
+
+  - type: ajaxSpider
+    parameters:
+      context: "CoffeeContext"
+      url: "${env.vars.target}"
+      maxDuration: 5
+      user: "Customer-Jack"
+
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 2
+
+  - type: activeScan
+    parameters:
+      context: "CoffeeContext"
+      policy: "Default Policy"
+      maxRuleDurationInMins: 5
+      maxScanDurationInMins: 25
+      addQueryParam: true
+      delayInMs: 0
+      user: "Customer-Jack"
+
+  - type: report
+    parameters:
+      template: "traditional-html"
+      reportDir: "reports"
+      reportFile: "zap-coffee-top10.html"
+      displayReport: false
+
+  - type: report
+    parameters:
+      template: "modern"
+      reportDir: "reports"
+      reportFile: "zap-coffee-modern.html"
+      displayReport: false
+
+  - type: report
+    parameters:
+      template: "json"
+      reportDir: "reports"
+      reportFile: "zap-coffee.json"
+      displayReport: false

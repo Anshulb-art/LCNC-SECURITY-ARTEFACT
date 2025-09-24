@@ -1,0 +1,8 @@
+﻿http://host.docker.internal:8080/
+http://host.docker.internal:8080/apple-touch-icon.png?638943054310836057
+http://host.docker.internal:8080/icon-16.png?638943054310836057
+http://host.docker.internal:8080/icon-32.png?638943054310836057
+http://host.docker.internal:8080/manifest.webmanifest?638943054310836057
+http://host.docker.internal:8080/mxclientsystem/mxui/mxui.js?638943054310836057
+http://host.docker.internal:8080/robots.txt
+http://host.docker.internal:8080/styles/web/css/main.css?638943054310836057
